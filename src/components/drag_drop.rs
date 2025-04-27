@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use dioxus::{html::HasFileData, prelude::*};
 use dioxus_logger::tracing;
 
@@ -25,6 +27,16 @@ pub fn UploadRectangle(
         }
     };
 
+    let read_drag_file = move |files: Vec<String>| async move {
+        for file_name in &files {
+            let res = convert_image(&Path::new(file_name), &format.read());
+            if let Err(res) = res {
+                *error_details.write() = res.to_string();
+                *error_occured.write() = true;
+            }
+        }
+    };
+
     rsx! {
         div {
             class: "rectangle grid x-screen place-items-center text-center relative",
@@ -35,7 +47,8 @@ pub fn UploadRectangle(
             ondrop: move |evt| async move {
                 evt.prevent_default();
                 if let Some(file_engine) = evt.files() {
-                    println!("{:#?}", file_engine.files())
+                    println!("{:#?}", file_engine.files());
+                    read_drag_file(file_engine.files()).await;
                 }
             },
             button {
