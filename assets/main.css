@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono');
+
+/* App-wide styling */
+body {
+    background-color: black;
+    color: #ffffff;
+    font-family: "IBM Plex Mono";
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.rectangle {
+    background-color: #22252b;
+    border-radius: 10px;
+    border: 4px dashed #767e91;
+    height: 100%;
+    min-height: 300px;
+    max-height: 300px;
+    cursor: pointer;
+    width: 100%;
+    min-width: 400px;
+    max-width: 1000px;
+    transition: all 0.2s ease-in-out;
+}
+
+.rectangle:hover {
+    box-shadow: 0px 0px 50px #767e91;
+}
+
+.dirbutton {
+    min-height: 40px;
+    max-height: 100px;
+    min-width: 100px;
+    height: 100%;
+    width: 30%;
+    background-color: #22252b;
+    color: white;
+    font-family: "IBM Plex Mono";
+    border-radius: 10px;
+    border: 4px solid #767e91;
+}
+
+
+.dirbutton:hover {
+    border: 4px dashed #767e91;
+}
+
+.formatpicker {
+    min-height: 40px;
+    max-height: 100px;
+    min-width: 100px;
+    max-width: 300px;
+    height: 100%;
+    width: 10%;
+    background-color: #22252b;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    appearance: none;
+    font-family: "IBM Plex Mono";
+    border-radius: 10px;
+    border: 4px solid #767e91;
+    text-align-last: center;
+}
+
+.formatpicker:hover {
+    border: 4px dashed #767e91;
+}

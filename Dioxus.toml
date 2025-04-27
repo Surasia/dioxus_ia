@@ -1,0 +1,25 @@
+[application]
+
+[web.app]
+
+# HTML title tag content
+title = "Imager"
+
+# include `assets` in web platform
+[web.resource]
+
+
+# Additional CSS style files
+style = []
+
+# Additional JavaScript files
+script = []
+
+[web.resource.dev]
+
+# Javascript code file
+# serve: [dev-server] only
+script = []
+
+[bundle]
+icon = ["assets/128x128@2x.png", "assets/icon.ico", "assets/icon.icns"]
