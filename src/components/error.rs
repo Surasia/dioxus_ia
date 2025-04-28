@@ -13,7 +13,7 @@ pub fn ErrorComponent(error_occured: Signal<bool>, error_details: Signal<String>
                 class: "formatpicker",
                 "Ignore"
             }
-
+        
         }
     }
 }

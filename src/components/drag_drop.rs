@@ -31,7 +31,14 @@ pub fn UploadRectangle(
             ondrop: move |evt| async move {
                 evt.prevent_default();
                 if let Some(file_engine) = evt.files() {
-                    read_file(file_engine.files().iter().map(|x| PathBuf::from_str(x).unwrap()).collect()).await;
+                    read_file(
+                            file_engine
+                                .files()
+                                .iter()
+                                .map(|x| PathBuf::from_str(x).unwrap())
+                                .collect(),
+                        )
+                        .await;
                 }
             },
             button {
