@@ -1,12 +1,14 @@
 [application]
-base_path = "dioxus_ia"
+name = "dioxus_ia"
+out_dir = "out"
 asset_dir = "assets"
+default_platform = "desktop"
 
 [web.app]
 
 # HTML title tag content
 title = "Imager"
-
+base_path = "dioxus_ia"
 # include `assets` in web platform
 [web.resource]
 
