@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Imager</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+  <link rel="preload" as="script" href="/dioxus_ia/assets/imager-998287eab4b19ae9.js" crossorigin><link rel="preload" as="fetch" type="application/wasm" href="/dioxus_ia/assets/imager_bg-b461aea9852257c1.wasm" crossorigin></head>
+  <body>
+    <div id="main"></div>
+  <script>
+            // We can't use a module script here because we need to start the script immediately when streaming
+            import("/dioxus_ia/assets/imager-998287eab4b19ae9.js").then(
+                ({ default: init }) => {
+                init("/dioxus_ia/assets/imager_bg-b461aea9852257c1.wasm").then((wasm) => {
+                    if (wasm.__wbindgen_start == undefined) {
+                    wasm.main();
+                    }
+                });
+                }
+            );
+            </script>
+            
+            </body>
+</html>
