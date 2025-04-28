@@ -1,6 +1,6 @@
 [application]
 name = "dioxus_ia"
-out_dir = "out"
+out_dir = "docs"
 asset_dir = "assets"
 default_platform = "desktop"
 

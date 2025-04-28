@@ -44,4 +44,4 @@ jobs:
         with:
           branch: gh-pages
           folder: target/dx/imager/release/web/public
-          target-folder: out
+          target-folder: docs
