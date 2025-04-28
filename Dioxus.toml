@@ -1,4 +1,5 @@
 [application]
+base_path = "dioxus_ia"
 asset_dir = "assets"
 
 [web.app]
