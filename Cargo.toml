@@ -9,12 +9,17 @@ edition = "2021"
 [dependencies]
 image = { version = "0.25.6", features = ["default-formats"] }
 anyhow = "1.0.98"
-dioxus = { version = "0.6.3", features = ["desktop", "file_engine"] }
 dioxus-logger = "0.6.2"
 serde = { version = "1.0.219", features = ["derive"] }
 toml = "0.8.21"
 rfd = "0.15.3"
 cross-xdg = "1.0.0"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+dioxus = { version = "0.6.3", features = ["desktop"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+dioxus = { version = "0.6.3", features = ["web"] }
 
 [features]
 default = ["desktop"]

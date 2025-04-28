@@ -3,10 +3,9 @@ use components::{
     format_selector::FormatSelector,
 };
 use config::Configuration;
-use dioxus::{
-    desktop::{Config, WindowBuilder},
-    prelude::*,
-};
+#[cfg(not(target_arch = "wasm32"))]
+use dioxus::desktop::{Config, WindowBuilder};
+use dioxus::prelude::*;
 use dioxus_logger::tracing::Level;
 
 mod components;
@@ -19,6 +18,7 @@ const _: Asset = asset!("/assets/IBMPlexMono.woff2");
 
 fn main() {
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
+    #[cfg(not(target_arch = "wasm32"))]
     dioxus::LaunchBuilder::desktop()
         .with_cfg(
             Config::new()
@@ -32,6 +32,8 @@ fn main() {
                 .with_disable_drag_drop_handler(false),
         )
         .launch(App);
+    #[cfg(target_arch = "wasm32")]
+    dioxus::launch(App);
 }
 
 #[component]
@@ -51,7 +53,9 @@ fn App() -> Element {
     let format = use_signal(|| String::from("png"));
     let mut error_occured = use_signal(|| false);
     let mut error_details = use_signal(|| String::from(""));
+    #[cfg(not(target_arch = "wasm32"))]
     let conf = Configuration::load();
+    #[cfg(not(target_arch = "wasm32"))]
     if let Err(ref err) = conf {
         *error_details.write() = err.to_string();
         *error_occured.write() = true
@@ -61,7 +65,10 @@ fn App() -> Element {
             ErrorComponent { error_occured, error_details }
         };
     }
+    #[cfg(not(target_arch = "wasm32"))]
     let config = use_signal(|| conf.unwrap());
+    #[cfg(target_arch = "wasm32")]
+    let config = use_signal(|| Configuration::default());
     rsx! {
         document::Stylesheet { href: CSS }
         document::Stylesheet { href: TAILWIND }

@@ -5,6 +5,7 @@ use crate::config::Configuration;
 
 #[component]
 pub fn DirButton(config: Signal<Configuration>, error_occured: Signal<bool>) -> Element {
+    #[cfg(not(target_arch = "wasm32"))]
     rsx! {
         div { class: "m-0 flex justify-center items-center mt-[40px]",
             h5 { "Output Folder: {config.read().output_path} " }
@@ -23,4 +24,6 @@ pub fn DirButton(config: Signal<Configuration>, error_occured: Signal<bool>) -> 
             }
         }
     }
+    #[cfg(target_arch = "wasm32")]
+    rsx! {}
 }
