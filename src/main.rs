@@ -14,6 +14,8 @@ mod config;
 mod converter;
 
 static CSS: Asset = asset!("/assets/main.css");
+static TAILWIND: Asset = asset!("/assets/tailwind.css");
+const _: Asset = asset!("/assets/IBMPlexMono.woff2");
 
 fn main() {
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
@@ -62,7 +64,7 @@ fn App() -> Element {
     let config = use_signal(|| conf.unwrap());
     rsx! {
         document::Stylesheet { href: CSS }
-        document::Stylesheet { href: asset!("/assets/tailwind.css") }
+        document::Stylesheet { href: TAILWIND }
         TitleDescription {}
         div { class: "self-center grid x-screen place-items-center mt-[50px]",
             UploadRectangle { format, error_occured, error_details }
