@@ -1,4 +1,4 @@
-name: Cargo test/clippy/build
+name: Windows bundle
 
 on:
   push:
