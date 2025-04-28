@@ -14,6 +14,7 @@ mod converter;
 
 static CSS: Asset = asset!("/assets/main.css");
 static TAILWIND: Asset = asset!("/assets/tailwind.css");
+static FAVICON: Asset = asset!("/assets/favicon.ico");
 const _: Asset = asset!("/assets/IBMPlexMono.woff2");
 
 fn main() {
@@ -72,6 +73,7 @@ fn App() -> Element {
     rsx! {
         document::Stylesheet { href: CSS }
         document::Stylesheet { href: TAILWIND }
+        document::Link { rel: "icon", href: FAVICON }
         TitleDescription {}
         div { class: "self-center grid x-screen place-items-center mt-[50px]",
             UploadRectangle { format, error_occured, error_details }
