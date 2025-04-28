@@ -24,6 +24,7 @@ dioxus = { version = "0.6.3", features = ["web"] }
 [features]
 default = ["desktop"]
 desktop = ["dioxus/desktop"]
+web = ["dioxus/web"]
 
 [profile.wasm-dev]
 inherits = "dev"
