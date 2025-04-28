@@ -1,9 +1,8 @@
-use std::path::Path;
+use std::{path::PathBuf, str::FromStr};
 
 use dioxus::{html::HasFileData, prelude::*};
-use dioxus_logger::tracing;
 
-use rfd::{AsyncFileDialog, FileHandle};
+use rfd::AsyncFileDialog;
 
 use crate::converter::convert_image::convert_image;
 
@@ -13,30 +12,15 @@ pub fn UploadRectangle(
     error_occured: Signal<bool>,
     error_details: Signal<String>,
 ) -> Element {
-    let read_file = move |files: Vec<FileHandle>| async move {
+    let read_file = move |files: Vec<PathBuf>| async move {
         for file_name in &files {
-            let res = convert_image(file_name.path(), &format.read());
-            if let Err(res) = res {
-                tracing::error!(
-                    "Failed to convert image {}: {res:#?}",
-                    file_name.file_name()
-                );
-                *error_details.write() = res.to_string();
-                *error_occured.write() = true;
-            }
-        }
-    };
-
-    let read_drag_file = move |files: Vec<String>| async move {
-        for file_name in &files {
-            let res = convert_image(&Path::new(file_name), &format.read());
+            let res = convert_image(file_name, &format.read());
             if let Err(res) = res {
                 *error_details.write() = res.to_string();
                 *error_occured.write() = true;
             }
         }
     };
-
     rsx! {
         div {
             class: "rectangle grid x-screen place-items-center text-center relative",
@@ -47,8 +31,7 @@ pub fn UploadRectangle(
             ondrop: move |evt| async move {
                 evt.prevent_default();
                 if let Some(file_engine) = evt.files() {
-                    println!("{:#?}", file_engine.files());
-                    read_drag_file(file_engine.files()).await;
+                    read_file(file_engine.files().iter().map(|x| PathBuf::from_str(x).unwrap()).collect()).await;
                 }
             },
             button {
@@ -85,7 +68,7 @@ pub fn UploadRectangle(
                         .pick_files()
                         .await;
                     if let Some(files) = files {
-                        read_file(files).await;
+                        read_file(files.iter().map(|x| x.path().to_path_buf()).collect()).await;
                     }
                 },
             }
