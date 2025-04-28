@@ -1,0 +1,30 @@
+name: Cargo test/clippy/build
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: windows-latest 
+    steps:      
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: cargo-bins/cargo-binstall@main
+
+      - name: "Install dioxus cli"
+        run: cargo binstall dioxus-cli
+
+      - name: Run bundler
+        run: dx bundle --platform desktop
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './target/dx/imager/bundle'
+
+
