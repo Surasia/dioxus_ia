@@ -21,6 +21,22 @@ pub fn UploadRectangle(
             }
         }
     };
+    let file_picker = move || async move {
+        let files = AsyncFileDialog::new()
+            .add_filter(
+                "Image Files",
+                &[
+                    "png", "jpg", "jpeg", "gif", "webp", "pbm", "pam", "ppm", "pgm", "tiff", "tif",
+                    "tga", "dds", "bmp", "ico", "hdr", "exr", "ff", "avif", "qoi", "pcx",
+                ],
+            )
+            .pick_files()
+            .await;
+        if let Some(files) = files {
+            read_file(files.iter().map(|x| x.path().to_path_buf()).collect()).await;
+        }
+    };
+
     rsx! {
         div {
             class: "rectangle grid x-screen place-items-center text-center relative",
@@ -43,41 +59,7 @@ pub fn UploadRectangle(
             },
             button {
                 class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
-                onclick: move |_| async move {
-                    #[cfg(not(target_os = "android"))]
-                    let files = AsyncFileDialog::new()
-                        .add_filter(
-                            "Image Files",
-                            &[
-                                "png",
-                                "jpg",
-                                "jpeg",
-                                "gif",
-                                "webp",
-                                "pbm",
-                                "pam",
-                                "ppm",
-                                "pgm",
-                                "tiff",
-                                "tif",
-                                "tga",
-                                "dds",
-                                "bmp",
-                                "ico",
-                                "hdr",
-                                "exr",
-                                "ff",
-                                "avif",
-                                "qoi",
-                                "pcx",
-                            ],
-                        )
-                        .pick_files()
-                        .await;
-                    if let Some(files) = files {
-                        read_file(files.iter().map(|x| x.path().to_path_buf()).collect()).await;
-                    }
-                },
+                onclick: move |_| async move { file_picker().await },
             }
             h1 { "Drag and Drop your image files!" }
         }
