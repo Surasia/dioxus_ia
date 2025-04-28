@@ -785,6 +785,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "cross-xdg"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4331bff02a6381ccec49a433d9ed6bdde66ec73a56d1e71455485cc41775fdd7"
+
+[[package]]
 name = "crossbeam-channel"
 version = "0.5.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2454,6 +2460,7 @@ name = "imager"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "cross-xdg",
  "dioxus",
  "dioxus-logger",
  "image",

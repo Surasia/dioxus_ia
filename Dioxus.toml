@@ -9,9 +9,6 @@ title = "Imager"
 # include `assets` in web platform
 [web.resource]
 
-[desktop.resource]
-assets = ["assets/IBMPlexMono.woff2"]
-
 # Additional CSS style files
 style = []
 
@@ -25,5 +22,6 @@ script = []
 script = []
 
 [bundle]
+identifier = "com.sura.imager"
+publisher = "Surasia"
 icon = ["assets/128x128@2x.png", "assets/icon.ico", "assets/icon.icns"]
-resources = ["assets/IBMPlexMono.woff2"]

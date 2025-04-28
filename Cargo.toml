@@ -14,6 +14,7 @@ dioxus-logger = "0.6.2"
 serde = { version = "1.0.219", features = ["derive"] }
 toml = "0.8.21"
 rfd = "0.15.3"
+cross-xdg = "1.0.0"
 
 [features]
 default = ["desktop"]
